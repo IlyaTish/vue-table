@@ -1,29 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <v-app id="inspire">
+      <v-main>
+        <v-container fluid>
+          <table-data
+            v-if="tableData.length > 0"
+            :data="tableData"
+          />
+        </v-container>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import axios from 'axios';
+import 'vuetify/dist/vuetify.min.css';
+import TableData from '@/components/TableData/TableData.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    TableData,
   },
 })
-export default class App extends Vue {}
+
+export default class App extends Vue {
+  tableData: Array<string> = [];
+
+  async mounted(): Promise<void> {
+    await axios
+      .get('https://jsonplaceholder.typicode.com/posts?_limit=50')
+      .then((response) => {
+        this.tableData = response.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.v-application {
+  &--wrap {
+    background-color: #efefef;
+  }
 }
 </style>
