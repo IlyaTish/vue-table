@@ -92,7 +92,6 @@ export default class TableData extends Vue {
   get trToDisplay(): Array<unknown> {
     const items = this.data.slice(0, this.currentEntrie);
 
-    // eslint-disable-next-line array-callback-return
     items.sort((a: string, b: string): number => {
       let modifier = 1;
 
