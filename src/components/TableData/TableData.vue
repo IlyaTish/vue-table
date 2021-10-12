@@ -87,7 +87,6 @@ export default class TableData extends Vue {
     this.thead = Object.keys(this.data[0]);
     // eslint-disable-next-line prefer-destructuring
     this.sortBy = this.thead[0];
-    console.log(this.sortBy);
   }
 
   get trToDisplay(): Array<unknown> {
@@ -107,7 +106,6 @@ export default class TableData extends Vue {
   }
 
   paginate(curEntrie: number): void {
-    console.log(this.allEntries);
     this.currentEntrie = curEntrie;
   }
 
@@ -116,8 +114,6 @@ export default class TableData extends Vue {
       // eslint-disable-next-line no-unused-expressions
       this.currentEntrie += 10;
     }
-
-    console.log(this.currentEntrie);
   }
 
   sort(s: string): void {
